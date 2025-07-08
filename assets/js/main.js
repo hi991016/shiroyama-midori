@@ -19,6 +19,26 @@ const init = () => {
   });
 };
 
+// ===== lenis =====
+if (!window.lenis) {
+  window.lenis = new Lenis({
+    duration: 1.0,
+    easing: t => t * (2 - t),
+    smooth: true,
+    mouseMultiplier: 1.0,
+    smoothTouch: true,
+    touchMultiplier: 1.5,
+    infinite: false,
+    direction: "vertical",
+    gestureDirection: "vertical",
+  });
+  function raf(t) {
+    window.lenis.raf(t);
+    requestAnimationFrame(raf);
+  }
+  requestAnimationFrame(raf);
+}
+
 // ===== app height =====
 const appHeight = () => {
   const doc = document.documentElement;
@@ -117,9 +137,7 @@ const initFadeIn = () => {
     let elem = fadeInArray[i];
     let distInView =
       elem.getBoundingClientRect().top - window.innerHeight + 100;
-    if (distInView < 0) {
-      elem.classList.add("--show");
-    }
+    elem.classList.toggle("--show", distInView < 0);
   }
 };
 eventsTrigger.forEach((evt) => {

@@ -9,6 +9,29 @@ const homepage = () => {
   initLoading();
 };
 
+// ===== lenis =====
+let isLoading = true;
+window.lenis = new Lenis({
+  duration: 1.0,
+  easing: (t) => t * (2 - t),
+  smooth: true,
+  mouseMultiplier: 1.0,
+  smoothTouch: true,
+  touchMultiplier: 1.5,
+  infinite: false,
+  direction: "vertical",
+  gestureDirection: "vertical",
+});
+function raf(t) {
+  if (!isLoading) {
+    window.lenis.raf(t);
+  } else {
+    window.lenis.scrollTo(0, { immediate: true });
+  }
+  requestAnimationFrame(raf);
+}
+requestAnimationFrame(raf);
+
 // ===== init loading =====
 const preventScroll = (e) => e.preventDefault();
 const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
@@ -17,6 +40,7 @@ const initLoading = async () => {
   if (sessionStorage.getItem("opening-displayed") === "true") {
     document.querySelector("[data-loading]").remove();
     swiperFv.autoplay.start();
+    isLoading = false;
   } else {
     // # Block scroll events
     window.addEventListener("wheel", preventScroll, { passive: false });
@@ -35,6 +59,7 @@ const initLoading = async () => {
     window.removeEventListener("wheel", preventScroll);
     window.removeEventListener("touchmove", preventScroll);
     window.removeEventListener("scroll", preventScroll);
+    isLoading = false;
 
     // # play swiper fv
     swiperFv.autoplay.start();
