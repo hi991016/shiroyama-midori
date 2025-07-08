@@ -2,7 +2,7 @@
 
 // ===== globals =====
 const isMobile = window.matchMedia("(max-width: 1023px)");
-const eventsTrigger = ["pageshow ", "scroll"];
+const eventsTrigger = ["pageshow", "scroll"];
 
 // ===== init =====
 const init = () => {

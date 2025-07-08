@@ -130,7 +130,7 @@ const handleFvOverlay = () => {
   overlay.style.opacity = Math.min(Math.max(value, 0), 0.8);
 };
 
-"pageshow scroll change".split(" ").forEach((evt) => {
+"pageshow scroll".split(" ").forEach((evt) => {
   window.addEventListener(evt, handleFvOverlay);
 });
 
