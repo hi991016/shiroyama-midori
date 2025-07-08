@@ -29,7 +29,7 @@ const appHeight = () => {
   doc.style.setProperty("--app-height", `${doc.clientHeight}px`);
   doc.style.setProperty("--menu-height", `${menuH}px`);
 };
-isMobile.addEventListener("change", appHeight);
+window.addEventListener("resize", appHeight);
 
 // ===== href fadeout =====
 document.addEventListener("click", (evt) => {

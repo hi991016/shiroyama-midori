@@ -5,6 +5,8 @@
 .homepage {
   // ===== fv =====
   .fv {
+    position: relative;
+
     &_container {
       position: relative;
       width: 100%;
@@ -56,10 +58,8 @@
       position: absolute;
       top: 50%;
       left: 50%;
-      transform: translate(-50%, 250%);
+      transform: translate(-50%, 200%);
       z-index: 2;
-      opacity: 0;
-      transition: opacity 0.5s ease-in-out;
 
       &_inner {
         width: 100%;
@@ -72,12 +72,6 @@
           color: $white-cl;
         }
       }
-
-      @include maxW(1023px) {
-        position: unset;
-        transform: none;
-        opacity: 1;
-      }
     }
 
     &_overlay {
@@ -88,6 +82,86 @@
       background-color: #2e580f;
       z-index: 1;
       opacity: 0;
+    }
+
+    &_heading {
+      position: absolute;
+      top: 150px;
+      right: 45px;
+      z-index: 2;
+
+      h2 {
+        width: 100%;
+        font-size: 3.2rem;
+        line-height: 1.3;
+        font-weight: 500;
+        letter-spacing: 1px;
+        writing-mode: vertical-rl;
+        font-feature-settings: normal;
+      }
+    }
+
+    &_desc {
+      position: absolute;
+      bottom: 40px;
+      left: 40px;
+      z-index: 2;
+      font-size: 1.5rem;
+      font-feature-settings: "palt" 1;
+      line-height: 1.5;
+    }
+
+    &_leaf {
+      position: absolute;
+      bottom: 90px;
+      right: -10px;
+      z-index: 2;
+    }
+
+    &_scrolldown {
+      position: absolute;
+      bottom: -1px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 2;
+      background-color: rgba(255, 255, 255, 0.5);
+      border-radius: 10px;
+      overflow: hidden;
+
+      span {
+        display: block;
+        width: 2px;
+        height: 60px;
+
+        &:before {
+          content: "";
+          display: block;
+          width: 100%;
+          height: 100%;
+          animation: scrolldown 2.2s infinite;
+          background-color: $white-cl;
+        }
+      }
+
+      @keyframes scrolldown {
+        0% {
+          transform: scale(1, 0);
+          transform-origin: 0 0;
+        }
+
+        50% {
+          transform: scale(1, 1);
+          transform-origin: 0 0;
+        }
+        51% {
+          transform: scale(1, 1);
+          transform-origin: 0 100%;
+        }
+        100% {
+          transform: scale(1, 0);
+          transform-origin: 0 100%;
+        }
+      }
     }
 
     @include maxW(1023px) {
@@ -103,6 +177,46 @@
           &:after {
             background-color: rgba($color: #000000, $alpha: 0.05);
           }
+        }
+      }
+
+      &_content {
+        margin-top: 120px;
+        position: unset;
+        transform: none;
+
+        &_inner {
+          p {
+            font-size: 1.6rem;
+            line-height: 2.1;
+            color: $black-cl;
+          }
+        }
+      }
+
+      &_heading {
+        top: 65px;
+        right: 20px;
+
+        h2 {
+          font-size: 1.9rem;
+        }
+      }
+
+      &_desc {
+        bottom: 24px;
+        left: 20px;
+        font-size: 1.3rem;
+      }
+
+      &_leaf {
+        bottom: 100px;
+        right: -10px;
+
+        svg {
+          transform: rotate(18deg);
+          width: 94.16px;
+          height: auto;
         }
       }
     }
