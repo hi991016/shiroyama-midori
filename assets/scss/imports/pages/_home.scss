@@ -3,4 +3,108 @@
 /* -------------------------------------------------------------------------- */
 
 .homepage {
+  // ===== fv =====
+  .fv {
+    &_container {
+      position: relative;
+      width: 100%;
+      height: var(--app-height);
+    }
+
+    &_swiper {
+      width: 68.056vw;
+      height: 68.056vw;
+      border-radius: 50%;
+
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      overflow: hidden;
+      pointer-events: none;
+
+      picture {
+        display: block;
+        position: relative;
+        z-index: 1;
+        height: 100%;
+        padding-bottom: 100%;
+        border-radius: 5px;
+        overflow: hidden;
+
+        &:after {
+          content: "";
+          position: absolute;
+          top: 0;
+          width: 100%;
+          height: 100%;
+          background-color: rgba($color: #000000, $alpha: 0.2);
+        }
+
+        img {
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+        }
+      }
+    }
+
+    &_content {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, 250%);
+      z-index: 2;
+      opacity: 0;
+      transition: opacity 0.5s ease-in-out;
+
+      &_inner {
+        width: 100%;
+        text-align: center;
+
+        p {
+          font-size: 2rem;
+          font-feature-settings: "palt" 1;
+          line-height: 2.7;
+          color: $white-cl;
+        }
+      }
+
+      @include maxW(1023px) {
+        position: unset;
+        transform: none;
+        opacity: 1;
+      }
+    }
+
+    &_overlay {
+      position: absolute;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background-color: #2e580f;
+      z-index: 1;
+      opacity: 0;
+    }
+
+    @include maxW(1023px) {
+      &_container {
+        overflow: hidden;
+      }
+
+      &_swiper {
+        width: 107.952vw;
+        height: 107.952vw;
+
+        picture {
+          &:after {
+            background-color: rgba($color: #000000, $alpha: 0.05);
+          }
+        }
+      }
+    }
+  }
 }

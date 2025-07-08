@@ -110,5 +110,21 @@ overlay.addEventListener("click", () => {
   detectOverlay(false);
 });
 
+// ===== scroll fade in/out =====
+const fadeInArray = document.querySelectorAll("[data-fadein]");
+const initFadeIn = () => {
+  for (let i = 0; i < fadeInArray.length; i++) {
+    let elem = fadeInArray[i];
+    let distInView =
+      elem.getBoundingClientRect().top - window.innerHeight + 100;
+    if (distInView < 0) {
+      elem.classList.add("--show");
+    }
+  }
+};
+eventsTrigger.forEach((evt) => {
+  window.addEventListener(evt, initFadeIn);
+});
+
 // ### ===== DOMCONTENTLOADED ===== ###
 window.addEventListener("DOMContentLoaded", init);

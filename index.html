@@ -307,9 +307,40 @@
     <!-- @main -->
     <main class="homepage">
         <!-- fv// -->
-        <section class="fv" style="height: 100vh;">
+        <section class="fv" data-fv>
             <div class="fv_container">
-                <h2>have a nice day!!</h2>
+                <div class="fv_swiper" data-fv-swiper>
+                    <div class="swiper-wrapper">
+                        <div class="swiper-slide">
+                            <picture>
+                                <source media="(max-width: 1023px)"
+                                    data-srcset="/assets/images/home/fv_slide_01.webp">
+                                <img class="lazy" draggable="false" data-src="/assets/images/home/fv_slide_01.webp"
+                                    alt="こころとからだを、たぷり育てる。" width="1440" height="779">
+                            </picture>
+                        </div>
+                        <div class="swiper-slide">
+                            <picture>
+                                <source media="(max-width: 1023px)"
+                                    data-srcset="https://shiroyama.studio1014.jp/wp/wp-content/themes/shiroyama/assets/images/home/fv_slide_02_sp.webp">
+                                <img class="lazy" draggable="false"
+                                    data-src="https://shiroyama.studio1014.jp/wp/wp-content/themes/shiroyama/assets/images/home/fv_slide_02.webp"
+                                    alt="こころとからだを、たぷり育てる。" width="1440" height="779">
+                            </picture>
+                        </div>
+                    </div>
+                    <div class="fv_overlay pc-only" data-fv-overlay></div>
+                </div>
+                <div class="fv_content" data-fv-content>
+                    <div class="fv_content_inner">
+                        <p>ちいさなことから、しっかりと。</p>
+                        <p>きちんと、ていねいに、きもちよく。</p>
+                        <p>からだがうごくと、こころがはたらく。</p>
+                        <p>こころが学ぶと、からだがみなぎる。</p>
+                        <p>このたっぷりとゆたかな時間は、</p>
+                        <p>みらいを育てる、たからもの。</p>
+                    </div>
+                </div>
             </div>
         </section>
         <!-- //fv -->
@@ -331,6 +362,8 @@
     <!-- @@footer -->
 
     <!-- @script -->
+    <script src="https://unpkg.com/gsap@3/dist/gsap.min.js"></script>
+    <script src="https://unpkg.com/gsap@3/dist/ScrollTrigger.min.js"></script>
     <script src="/assets/js/libs.js"></script>
     <script src="/assets/js/main.js"></script>
     <script src="/assets/js/home.js"></script>
