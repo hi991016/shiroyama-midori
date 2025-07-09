@@ -120,30 +120,44 @@ const swiperFv = new Swiper("[data-fv-swiper]", {
 // # scrollTrigger fv-content
 gsap.registerPlugin(ScrollTrigger);
 const handleFvContent = () => {
-  const fvContent = document.querySelector("[data-fv-content]");
   const fv = document.querySelector("[data-fv]");
+  const fvContent = document.querySelector("[data-fv-content]");
+  ScrollTrigger.getById("fvContent")?.kill();
+
   if (breakpoints.matches) return;
-  gsap.to(fvContent, {
+
+  const animation = gsap.to(fvContent, {
     y: "-50%",
     ease: "none",
     scrollTrigger: {
+      id: "fvContent",
       trigger: "[data-fv]",
       start: "top top",
-      end: () => "+=" + fv.offsetHeight * 2,
+      // end: () => "+=" + fv.offsetHeight * 2,
+      end: () => `+=${fv.offsetHeight - fvContent.offsetHeight}px`,
       pin: true,
       scrub: true,
       invalidateOnRefresh: true,
       onUpdate: (self) => {
         const p = self.progress;
-        const fadeStart = 0.3;
-        if (p < fadeStart) {
-          fvContent.style.opacity = 0;
-        } else {
-          fvContent.style.opacity = 1;
-        }
+        fvContent.style.opacity = p < 0.3 ? 0 : 1;
       },
     },
   });
+
+  // Thêm Intersection Observer
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          ScrollTrigger.refresh();
+        }
+      });
+    },
+    { threshold: 0.1 }
+  );
+
+  observer.observe(fv);
 };
 "pageshow change".split(" ").forEach((evt) => {
   window.addEventListener(evt, handleFvContent);
