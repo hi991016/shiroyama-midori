@@ -12,16 +12,22 @@ const homepage = () => {
 // ===== lenis =====
 let isLoading = true;
 window.lenis = new Lenis({
-  duration: 1.0,
-  easing: (t) => t * (2 - t),
-  smooth: true,
-  mouseMultiplier: 1.0,
-  smoothTouch: true,
-  touchMultiplier: 1.5,
-  infinite: false,
+  duration: 1,
+  easing: (t) => Math.min(1, 1.001 - Math.pow(1 - t, 2.5)),
   direction: "vertical",
   gestureDirection: "vertical",
+  smooth: true,
+  smoothTouch: false,
+  mouseMultiplier: 1,
+  touchMultiplier: 1.5,
+  autoRaf: true,
+  infinite: false,
 });
+window.lenis.on("scroll", ScrollTrigger.update);
+gsap.ticker.add((time) => {
+  lenis.raf(time * 1000);
+});
+gsap.ticker.lagSmoothing(0);
 function raf(t) {
   if (!isLoading) {
     window.lenis.raf(t);
@@ -115,6 +121,7 @@ const swiperFv = new Swiper("[data-fv-swiper]", {
 gsap.registerPlugin(ScrollTrigger);
 const handleFvContent = () => {
   const fvContent = document.querySelector("[data-fv-content]");
+  const fv = document.querySelector("[data-fv]");
   if (breakpoints.matches) return;
   gsap.to(fvContent, {
     y: "-50%",
@@ -122,13 +129,13 @@ const handleFvContent = () => {
     scrollTrigger: {
       trigger: "[data-fv]",
       start: "top top",
-      end: () => "+=" + window.innerHeight * 2,
+      end: () => "+=" + fv.offsetHeight * 2,
       pin: true,
       scrub: true,
       invalidateOnRefresh: true,
       onUpdate: (self) => {
         const p = self.progress;
-        const fadeStart = 0.5;
+        const fadeStart = 0.3;
         if (p < fadeStart) {
           fvContent.style.opacity = 0;
         } else {
@@ -157,6 +164,30 @@ const handleFvOverlay = () => {
 
 "pageshow scroll".split(" ").forEach((evt) => {
   window.addEventListener(evt, handleFvOverlay);
+});
+
+// ===== about =====
+const aboutSwiper = new Swiper("[data-about-swiper]", {
+  navigation: {
+    nextEl: ".swiper-button-next",
+    prevEl: ".swiper-button-prev",
+  },
+  speed: 600,
+  breakpoints: {
+    0: {
+      slidesPerView: 1.231,
+      spaceBetween: 20,
+      allowTouchMove: true,
+      draggable: true,
+    },
+    1024: {
+      // slidesPerView: 2.205,
+      slidesPerView: "auto",
+      spaceBetween: 30,
+      allowTouchMove: false,
+      draggable: false,
+    },
+  },
 });
 
 // ### ===== DOMCONTENTLOADED ===== ###
