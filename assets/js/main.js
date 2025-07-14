@@ -27,17 +27,31 @@ if (!window.lenis) {
     direction: "vertical",
     gestureDirection: "vertical",
     smooth: true,
-    smoothTouch: false,
+    smoothTouch: true,
     mouseMultiplier: 1,
     touchMultiplier: 1.5,
     autoRaf: true,
     infinite: false,
+    direction: "vertical",
+    gestureDirection: "vertical",
   });
   function raf(t) {
     window.lenis.raf(t);
     requestAnimationFrame(raf);
   }
   requestAnimationFrame(raf);
+
+  // # back to top
+  const handleBacktoTop = () => {
+    window.lenis.scrollTo(0, {
+      duration: 1.5,
+      easing: (t) => t * t * t * (t * (t * 6 - 15) + 10),
+      force: true,
+    });
+  };
+  document.querySelectorAll("[data-backtotop]")?.forEach((e) => {
+    e.addEventListener("click", handleBacktoTop);
+  });
 }
 
 // ===== app height =====
@@ -143,6 +157,23 @@ const initFadeIn = () => {
 };
 eventsTrigger.forEach((evt) => {
   window.addEventListener(evt, initFadeIn);
+});
+
+// ===== hide reservation =====
+const [reservation, footer] = [
+  document.querySelector("[data-reservation]"),
+  document.querySelector("[data-footer]"),
+];
+const handleReservation = () => {
+  const footerInView = footer.offsetTop;
+  if (!reservation || !isMobile.matches) return;
+  reservation?.classList.toggle(
+    "--hidden",
+    window.scrollY + window.innerHeight >= footerInView
+  );
+};
+eventsTrigger.forEach((evt) => {
+  window.addEventListener(evt, handleReservation);
 });
 
 // ### ===== DOMCONTENTLOADED ===== ###

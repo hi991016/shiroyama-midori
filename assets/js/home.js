@@ -17,11 +17,13 @@ window.lenis = new Lenis({
   direction: "vertical",
   gestureDirection: "vertical",
   smooth: true,
-  smoothTouch: false,
+  smoothTouch: true,
   mouseMultiplier: 1,
   touchMultiplier: 1.5,
   autoRaf: true,
   infinite: false,
+  direction: "vertical",
+  gestureDirection: "vertical",
 });
 window.lenis.on("scroll", ScrollTrigger.update);
 gsap.ticker.add((time) => {
@@ -76,7 +78,7 @@ const initLoading = async () => {
 };
 
 // ===== scroll logo shrink =====
-const handleHeaderLogo = function () {
+const handleHeaderLogo = () => {
   const headerLogo = document.querySelector("[data-header-logo]");
   const scrollPosition = window.scrollY || document.documentElement.scrollTop;
   if (!headerLogo || breakpoints.matches) return;
