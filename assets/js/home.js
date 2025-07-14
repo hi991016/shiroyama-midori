@@ -123,46 +123,51 @@ const handleFvContent = () => {
   const fv = document.querySelector("[data-fv]");
   const fvContent = document.querySelector("[data-fv-content]");
   ScrollTrigger.getById("fvContent")?.kill();
+  if (breakpoints.matches || !fv || !fvContent) return;
 
-  if (breakpoints.matches) return;
-
-  const animation = gsap.to(fvContent, {
+  gsap.to(fvContent, {
     y: "-50%",
     ease: "none",
     scrollTrigger: {
       id: "fvContent",
-      trigger: "[data-fv]",
+      trigger: fv,
       start: "top top",
-      // end: () => "+=" + fv.offsetHeight * 2,
-      end: () => `+=${fv.offsetHeight - fvContent.offsetHeight}px`,
+      end: () => `+=${fv.offsetHeight}`,
       pin: true,
-      scrub: true,
+      scrub: 0.5,
       invalidateOnRefresh: true,
       onUpdate: (self) => {
-        const p = self.progress;
-        fvContent.style.opacity = p < 0.3 ? 0 : 1;
+        fvContent.style.opacity = self.progress < 0.3 ? 0 : 1;
       },
+      markers: false,
     },
   });
 
-  // Thêm Intersection Observer
-  const observer = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          ScrollTrigger.refresh();
-        }
-      });
-    },
-    { threshold: 0.1 }
-  );
-
-  observer.observe(fv);
+  // refactor refresh
+  requestAnimationFrame(() => {
+    ScrollTrigger.refresh();
+  });
 };
-"pageshow change".split(" ").forEach((evt) => {
+
+// resize smooth
+let resizeTimeout;
+const optimizedResize = () => {
+  clearTimeout(resizeTimeout);
+  resizeTimeout = setTimeout(() => {
+    requestAnimationFrame(handleFvContent);
+  }, 200);
+};
+
+// use ResizeObserver wuth root margin
+const resizeObserver = new ResizeObserver(optimizedResize);
+resizeObserver.observe(document.documentElement, {
+  box: "content-box",
+});
+
+// init
+"load pageshow".split(" ").forEach((evt) => {
   window.addEventListener(evt, handleFvContent);
 });
-window.addEventListener("resize", () => ScrollTrigger.refresh());
 
 // # scroll overlay swiper
 const handleFvOverlay = () => {
