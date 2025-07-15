@@ -249,7 +249,7 @@
 
     @include maxW(1023px) {
       &_container {
-        margin-top: 120px;
+        padding-top: 120px;
       }
 
       &_link {
@@ -320,6 +320,11 @@
       picture {
         border-radius: 80px;
         aspect-ratio: 1 / 1;
+        z-index: -1;
+
+        img {
+          z-index: -2;
+        }
 
         .about_btn {
           display: none;
@@ -534,7 +539,7 @@
   // ===== admission ====
   .admission {
     &_container {
-      margin-top: 250px;
+      margin: 250px auto;
     }
 
     &_list {
@@ -560,7 +565,7 @@
 
     @include maxW(1023px) {
       &_container {
-        margin-top: 120px;
+        margin: 120px auto;
       }
 
       &_list {
