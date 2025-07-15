@@ -467,6 +467,10 @@
     &_main {
       padding-bottom: calc(680 / 1360 * 100%);
       border-radius: 80px;
+
+      &:after {
+        background-color: rgba($color: #000, $alpha: 0.2);
+      }
     }
 
     &_logo {

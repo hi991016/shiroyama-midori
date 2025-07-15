@@ -178,8 +178,12 @@
             font-size: 1.4rem;
 
             svg {
-              width: 17px;
+              width: 16px;
               height: auto;
+
+              &.window {
+                width: 17px;
+              }
             }
           }
         }
