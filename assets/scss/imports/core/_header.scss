@@ -47,11 +47,10 @@
     align-items: center;
     justify-content: center;
     gap: 25px;
-    color: $white-cl;
-    transition: color 0.3s ease;
+    transition: color 1s ease;
 
     &.--black {
-      color: $black-cl;
+      color: $black-cl !important;
     }
 
     a.--current {
@@ -68,6 +67,10 @@
         background-color: $green-cl;
       }
     }
+  }
+
+  [data-header-navbar] {
+    color: $white-cl;
   }
 
   &_right {

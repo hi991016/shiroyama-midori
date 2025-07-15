@@ -145,6 +145,16 @@ overlay.addEventListener("click", () => {
   detectOverlay(false);
 });
 
+// ===== scroll logo shrink =====
+const handleHeaderLogo = () => {
+  const headerLogo = document.querySelector("[data-header-logo]");
+  const scrollPosition = window.scrollY || document.documentElement.scrollTop;
+  if (!headerLogo || isMobile.matches) return;
+
+  headerLogo.classList.toggle("--shrink", scrollPosition > 80);
+};
+window.addEventListener("scroll", handleHeaderLogo);
+
 // ===== scroll fade in/out =====
 const fadeInArray = document.querySelectorAll("[data-fadein]");
 const initFadeIn = () => {

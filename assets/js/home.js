@@ -77,16 +77,6 @@ const initLoading = async () => {
   }
 };
 
-// ===== scroll logo shrink =====
-const handleHeaderLogo = () => {
-  const headerLogo = document.querySelector("[data-header-logo]");
-  const scrollPosition = window.scrollY || document.documentElement.scrollTop;
-  if (!headerLogo || breakpoints.matches) return;
-
-  headerLogo.classList.toggle("--shrink", scrollPosition > 80);
-};
-window.addEventListener("scroll", handleHeaderLogo);
-
 // ===== init header =====
 const handleHeaderNavbar = () => {
   const scrollY = window.scrollY;
