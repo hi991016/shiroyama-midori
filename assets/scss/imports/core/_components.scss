@@ -320,11 +320,12 @@
       z-index: 2;
       text-align: center;
       color: $white-cl;
+      width: 100%;
 
       p {
         margin-top: 33px;
         font-size: 1.6rem;
-        line-height: 1.3;
+        line-height: 1.5;
       }
     }
   }
@@ -347,7 +348,7 @@
       top: 0;
       display: grid;
       grid-template-columns: repeat(2, 1fr);
-      padding-right: 80px;
+      padding: 0 80px;
       z-index: 1;
     }
 

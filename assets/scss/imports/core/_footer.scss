@@ -72,7 +72,7 @@
     &_container {
       padding: 45px var(--paddsp) 25px;
       grid-template-columns: repeat(1, 1fr);
-      gap: 55px;
+      gap: 60px;
       align-items: center;
     }
 
@@ -80,7 +80,7 @@
       margin-top: 45px;
       text-align: center;
       font-size: 1.3rem;
-      line-height: 1.62;
+      line-height: 1.67;
     }
 
     &_link {
@@ -88,9 +88,18 @@
       justify-content: center;
       gap: 20px;
       font-size: 1.3rem;
+    }
 
-      a:after {
-        bottom: -5px;
+    &_center {
+      gap: 20px;
+
+      p {
+        font-size: 1.2rem;
+      }
+
+      svg {
+        width: 82.19px;
+        height: auto;
       }
     }
 

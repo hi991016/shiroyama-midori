@@ -67,7 +67,6 @@
 
         p {
           font-size: 2rem;
-          font-feature-settings: "palt" 1;
           line-height: 2.7;
           color: $white-cl;
         }
@@ -108,7 +107,7 @@
       z-index: 2;
       font-size: 1.5rem;
       font-feature-settings: "palt" 1;
-      line-height: 1.5;
+      line-height: 1.62;
     }
 
     &_leaf {
@@ -190,6 +189,7 @@
             font-size: 1.6rem;
             line-height: 2.1;
             color: $black-cl;
+            font-feature-settings: "palt" 1;
           }
         }
       }
@@ -267,7 +267,7 @@
   .about {
     &_container {
       position: relative;
-      margin-top: 250px;
+      margin-top: 265px;
       padding: 0 40px;
 
       @include maxW(1023px) {
@@ -510,6 +510,8 @@
 
         &.swiper-button-disabled {
           opacity: 1;
+          pointer-events: auto;
+          cursor: pointer;
         }
 
         svg {
@@ -559,7 +561,7 @@
         margin-top: 30px;
         text-align: center;
         font-size: 2rem;
-        line-height: 1.35;
+        line-height: 1.45;
       }
     }
 
