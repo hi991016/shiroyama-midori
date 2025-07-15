@@ -16,15 +16,10 @@
 
   &_logo {
     display: block;
-    width: 160px;
-    height: 225px;
+    width: 132px;
+    height: 186px;
     overflow: hidden;
     transition: 0.5s;
-
-    &.--shrink {
-      width: 132px;
-      height: 145px;
-    }
 
     svg {
       width: 100%;
@@ -32,8 +27,8 @@
     }
 
     @include maxW(1023px) {
-      width: 80px;
-      height: auto;
+      width: 65px;
+      height: 72px;
     }
   }
 
@@ -69,10 +64,6 @@
     }
   }
 
-  [data-header-navbar] {
-    color: $white-cl;
-  }
-
   &_right {
     position: fixed;
     top: 58px;
@@ -103,6 +94,44 @@
       opacity: 0.5;
       visibility: visible;
       pointer-events: auto;
+    }
+  }
+}
+
+@include minW(1023px) {
+  [data-header-homepage] {
+    color: $white-cl;
+
+    .c-header_logo {
+      width: 160px;
+      height: 225px;
+    }
+  }
+
+  [data-header-shrink] {
+    &.--shrink {
+      .c-header_logo {
+        width: 132px;
+        height: 145px;
+      }
+    }
+  }
+}
+
+@include maxW(1023px) {
+  [data-header-homepage] {
+    .c-header_logo {
+      width: 80px;
+      height: 113px;
+    }
+  }
+
+  [data-header-shrink] {
+    &.--shrink {
+      .c-header_logo {
+        width: 65px;
+        height: 72px;
+      }
     }
   }
 }

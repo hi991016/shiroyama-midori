@@ -56,6 +56,11 @@
   @include maxW(1023px) {
     gap: 10px;
 
+    svg {
+      width: 45.59px;
+      height: auto;
+    }
+
     h2 {
       font-size: 1.9rem;
     }
@@ -442,6 +447,49 @@
             right: 23px;
           }
         }
+      }
+    }
+  }
+}
+
+// ===== tit =====
+.c-tit {
+  &_heading {
+    margin-top: 220px;
+    text-align: center;
+  }
+
+  &_thumb {
+    position: relative;
+    margin-top: 120px;
+    padding: 0 40px;
+
+    &_main {
+      padding-bottom: calc(680 / 1360 * 100%);
+      border-radius: 80px;
+    }
+
+    &_logo {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 2;
+    }
+  }
+
+  @include maxW(1023px) {
+    &_heading {
+      margin-top: 115px;
+    }
+
+    &_thumb {
+      margin-top: 45px;
+      padding: 0 var(--paddsp);
+
+      &_main {
+        padding-bottom: 100%;
+        border-radius: 40px;
       }
     }
   }

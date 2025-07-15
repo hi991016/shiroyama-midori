@@ -147,9 +147,9 @@ overlay.addEventListener("click", () => {
 
 // ===== scroll logo shrink =====
 const handleHeaderLogo = () => {
-  const headerLogo = document.querySelector("[data-header-logo]");
+  const headerLogo = document.querySelector("[data-header-shrink]");
   const scrollPosition = window.scrollY || document.documentElement.scrollTop;
-  if (!headerLogo || isMobile.matches) return;
+  if (!headerLogo) return;
 
   headerLogo.classList.toggle("--shrink", scrollPosition > 80);
 };
