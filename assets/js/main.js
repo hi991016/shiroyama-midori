@@ -122,10 +122,10 @@ const [overlay, menu, menuTogglers] = [
 const detectOverlay = (detect) => {
   if (detect) {
     overlay.classList.add("--show");
-    document.body.style.overflow = "hidden";
+    window.lenis?.stop();
   } else {
     overlay.classList.remove("--show");
-    document.body.style.removeProperty("overflow");
+    window.lenis?.start();
   }
 };
 
@@ -184,6 +184,118 @@ const handleReservation = () => {
 };
 eventsTrigger.forEach((evt) => {
   window.addEventListener(evt, handleReservation);
+});
+
+// ===== handle tabs change =====
+const initTabs = () => {
+  const tabs = document.querySelectorAll("[data-tabs-items]");
+  const contents = document.querySelectorAll("[data-tabs-content]");
+
+  tabs.forEach((tab, index) => {
+    tab.addEventListener("click", () => {
+      // remove all class items/content
+      tabs.forEach((t) => t.classList.remove("--active"));
+      contents.forEach((c) => c.classList.remove("--active"));
+
+      // add class item/click show/content
+      tab.classList.add("--active");
+      contents[index].classList.add("--active");
+    });
+  });
+};
+initTabs();
+
+// ===== clone slides when < 4 =====
+const cloneSlidesIfNeeded = (swiperSelector, minSlidesRequired = 4) => {
+  const swiperWrapper = document.querySelector(
+    `${swiperSelector} .swiper-wrapper`
+  );
+  if (!swiperWrapper) return;
+  const slides = swiperWrapper.querySelectorAll(".swiper-slide");
+  if (slides.length >= minSlidesRequired) return;
+  slides.forEach((slide) => {
+    const clone = slide.cloneNode(true);
+    const source = clone.querySelector("source");
+    if (source && source.dataset.srcset) {
+      source.srcset = source.dataset.srcset;
+    }
+    swiperWrapper.appendChild(clone);
+  });
+};
+
+// ===== about page =====
+// cloneSlidesIfNeeded("[data-about-archive-swiper]");
+const aboutArchiveSwiper = new Swiper("[data-about-archive-swiper]", {
+  initialSlide: 1,
+  centeredSlides: true,
+  // loop: true,
+  navigation: {
+    nextEl: ".swiper-button-next",
+    prevEl: ".swiper-button-prev",
+  },
+  speed: 1000,
+  breakpoints: {
+    0: {
+      slidesPerView: 1.26,
+      spaceBetween: 20,
+      allowTouchMove: true,
+      draggable: true,
+    },
+    1024: {
+      slidesPerView: 1.815,
+      spaceBetween: 30,
+      allowTouchMove: false,
+      draggable: false,
+    },
+  },
+});
+
+// ===== education page =====
+const educationBasicSwiper = new Swiper("[data-education-basic-swiper]", {
+  initialSlide: 1,
+  centeredSlides: true,
+  navigation: {
+    nextEl: ".swiper-button-next",
+    prevEl: ".swiper-button-prev",
+  },
+  speed: 1000,
+  breakpoints: {
+    0: {
+      slidesPerView: 1.26,
+      spaceBetween: 20,
+      allowTouchMove: true,
+      draggable: true,
+    },
+    1024: {
+      slidesPerView: 1.725,
+      spaceBetween: 30,
+      allowTouchMove: false,
+      draggable: false,
+    },
+  },
+});
+
+// ===== daily page =====
+const dailySwiper = new Swiper("[data-daily-swiper]", {
+  speed: 1000,
+  breakpoints: {
+    0: {
+      initialSlide: 1,
+      centeredSlides: true,
+      slidesPerView: 1.26,
+      spaceBetween: 20,
+      allowTouchMove: true,
+      draggable: true,
+    },
+    1024: {
+      initialSlide: 0,
+      centeredSlides: false,
+      slidesPerView: 3,
+      spaceBetween: 35,
+      allowTouchMove: false,
+      draggable: false,
+    },
+  },
 });
 
 // ### ===== DOMCONTENTLOADED ===== ###
