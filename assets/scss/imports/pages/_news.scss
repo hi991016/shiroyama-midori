@@ -33,13 +33,10 @@
       }
     }
 
-    &_list {
-      padding-bottom: 100px;
-      border-bottom: 2px solid #dde9d2;
-    }
-
     &_controls {
-      margin-top: 45px;
+      padding-top: 45px;
+      border-top: 1px solid #dde9d2;
+      margin-top: 100px;
       width: 100%;
       display: grid;
       grid-template-columns: repeat(3, 1fr);
@@ -96,13 +93,9 @@
         }
       }
 
-      &_list {
-        margin-top: 60px;
-        padding-bottom: 60px;
-      }
-
       &_controls {
-        margin-top: 25px;
+        padding-top: 25px;
+        margin-top: 60px;
       }
 
       &_pager {
@@ -121,5 +114,180 @@
 
   // ====== details =====
   .details {
+    &_inner {
+      margin-top: 250px;
+    }
+
+    &_heading {
+      padding: 0 var(--paddcontent);
+
+      h2.title {
+        font-size: 2.4rem;
+        font-weight: 500;
+        line-height: 1.5;
+        text-align: justify;
+        font-feature-settings: "palt" 1;
+      }
+
+      .group {
+        margin-top: 30px;
+        display: flex;
+        align-items: center;
+        gap: 30px;
+
+        p.date {
+          font-size: 1.7rem;
+        }
+
+        a.category {
+          font-size: 1.4rem;
+          letter-spacing: 0.5px;
+          width: 120px;
+          height: 30px;
+          background-color: #f5f4ec;
+          border-radius: 60px;
+          text-align: center;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+      }
+    }
+
+    &_entry {
+      margin-top: 80px;
+      padding: 0 var(--paddcontent);
+
+      p {
+        margin-top: 60px;
+        line-height: 1.7;
+        text-align: justify;
+        font-feature-settings: "palt" 1;
+
+        & > img {
+          width: 100%;
+          height: 100%;
+          object-fit: contain;
+          border-radius: 80px;
+        }
+
+        & > a:not(.btn) {
+          display: inline-block;
+          position: relative;
+
+          &:before {
+            content: "";
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 100%;
+            height: 2px;
+            border-radius: 10px;
+            background-color: $green-cl;
+          }
+        }
+
+        & > a.btn {
+          position: relative;
+          margin-top: 80px;
+          width: 370px;
+          height: 70px;
+          border: 2px solid #dcead2;
+          border-radius: 60px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          transition: 0.3s ease-in-out;
+
+          &:after {
+            width: 20px;
+            content: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 22 15'%3E%3Cg stroke='%23559c21' stroke-linecap='round' stroke-width='2'%3E%3Cline x2='20' y1='8' y2='8'/%3E%3Cline x2='6' y2='6' transform='translate(15 2)'/%3E%3Cline x1='6' y2='6' transform='translate(15 8)'/%3E%3C/g%3E%3C/svg%3E");
+            position: absolute;
+            right: 35px;
+            top: 50%;
+            transform: translateY(-50%);
+          }
+
+          &:hover {
+            opacity: 1;
+            background-color: #dcead2;
+          }
+        }
+      }
+
+      h3 {
+        margin-top: 120px;
+        font-size: 2.4rem;
+        font-weight: 500;
+        line-height: 1.5;
+      }
+
+      p:has(> img) {
+        margin: 60px calc(-1 * var(--paddcontent)) 80px;
+      }
+    }
+
+    @include maxW(1023px) {
+      &_inner {
+        margin-top: 135px;
+      }
+
+      &_heading {
+        padding: 0;
+
+        h2.title {
+          font-size: 1.7rem;
+        }
+
+        .group {
+          margin-top: 15px;
+          gap: 15px;
+
+          p.date {
+            font-size: 1.4rem;
+          }
+
+          a.category {
+            font-size: 1.1rem;
+            width: 84px;
+            height: 25px;
+          }
+        }
+      }
+
+      &_entry {
+        margin-top: 45px;
+        padding: 0;
+
+        p {
+          margin-top: 45px;
+
+          & > img {
+            border-radius: 40px;
+          }
+
+          & > a.btn {
+            margin-top: 45px;
+            width: 100%;
+            height: 60px;
+            font-size: 1.4rem;
+
+            &:after {
+              width: 16px;
+              right: 30px;
+            }
+          }
+        }
+
+        h3 {
+          margin-top: 80px;
+          font-size: 1.7rem;
+        }
+
+        p:has(> img) {
+          margin: 45px 0 0;
+        }
+      }
+    }
   }
 }

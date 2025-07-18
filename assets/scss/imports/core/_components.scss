@@ -541,7 +541,7 @@
 
     &_content {
       margin-top: 80px;
-      padding: 0 6.25vw;
+      padding: 0 var(--paddcontent);
 
       p {
         font-size: 1.6rem;
