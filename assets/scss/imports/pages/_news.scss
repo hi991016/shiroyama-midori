@@ -1,0 +1,125 @@
+/* -------------------------------------------------------------------------- */
+/*                                  news page                                 */
+/* -------------------------------------------------------------------------- */
+
+.newspage {
+  // ====== news =====
+  .news {
+    &_category {
+      margin-top: 120px;
+      width: 100%;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 30px;
+
+      li {
+        width: fit-content;
+        position: relative;
+
+        &.--current {
+          &:after {
+            content: "";
+            position: absolute;
+            left: 0;
+            bottom: -7px;
+            width: 100%;
+            height: 2px;
+            background-color: $green-cl;
+            border-radius: 10px;
+          }
+        }
+      }
+    }
+
+    &_list {
+      padding-bottom: 100px;
+      border-bottom: 2px solid #dde9d2;
+    }
+
+    &_controls {
+      margin-top: 45px;
+      width: 100%;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      align-items: center;
+      gap: 20px;
+    }
+
+    &_pager {
+      line-height: 1.5;
+
+      span {
+        color: $green-cl;
+      }
+
+      &.older {
+        margin-left: auto;
+      }
+    }
+
+    &_center {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+
+      a {
+        line-height: 1.5;
+        position: relative;
+
+        &.--active:after {
+          opacity: 1;
+        }
+
+        &:after {
+          content: "";
+          position: absolute;
+          bottom: -5px;
+          left: 50%;
+          transform: translateX(-50%);
+          width: 15px;
+          height: 2px;
+          background-color: $green-cl;
+          opacity: 0;
+        }
+      }
+    }
+
+    @include maxW(1023px) {
+      &_category {
+        margin-top: 45px;
+        gap: 20px;
+
+        li {
+          font-size: 1.3rem;
+        }
+      }
+
+      &_list {
+        margin-top: 60px;
+        padding-bottom: 60px;
+      }
+
+      &_controls {
+        margin-top: 25px;
+      }
+
+      &_pager {
+        font-size: 1.3rem;
+      }
+
+      &_center {
+        gap: 10px;
+
+        a {
+          font-size: 1.3rem;
+        }
+      }
+    }
+  }
+
+  // ====== details =====
+  .details {
+  }
+}
