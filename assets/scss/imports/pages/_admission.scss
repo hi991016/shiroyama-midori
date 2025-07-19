@@ -93,6 +93,102 @@
         }
       }
     }
+
+    &_options {
+      margin-top: 200px;
+
+      @include maxW(1023px) {
+        margin-top: 120px;
+      }
+    }
+
+    &_nav {
+      position: relative;
+      margin-top: 80px;
+
+      ul {
+        width: 100%;
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+
+        li {
+          width: 100%;
+          position: relative;
+          cursor: pointer;
+          font-size: 2rem;
+          line-height: 1.5;
+          text-align: center;
+          padding-bottom: 40px;
+          border-bottom: 2px solid #dde9d2;
+          font-feature-settings: "palt" 1;
+          opacity: 0.5;
+          transition: opacity 0.5s ease-in-out;
+
+          &.--active {
+            opacity: 1;
+          }
+
+          svg {
+            display: none;
+          }
+        }
+      }
+
+      span.indicator {
+        position: absolute;
+        bottom: 0;
+        min-width: 0;
+        width: 0;
+        height: 2px;
+        background-color: $green-cl;
+        transition: left 0.3s, width 0.3s;
+      }
+
+      @include maxW(1023px) {
+        ul {
+          grid-template-columns: repeat(1, 1fr);
+          gap: 8px;
+
+          li {
+            width: fit-content;
+            font-size: 1.6rem;
+            padding-bottom: 0;
+            border-bottom: none;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+
+            &.--active {
+              &:after {
+                content: "";
+                position: absolute;
+                top: 55%;
+                right: -20px;
+                transform: translateY(-50%);
+                width: 6px;
+                height: 6px;
+                border-radius: 50%;
+                background-color: $green-cl;
+              }
+            }
+
+            svg {
+              display: block;
+              width: 12px;
+              height: auto;
+            }
+          }
+        }
+
+        span.indicator {
+          display: none;
+        }
+      }
+    }
+
+    &_tabs {
+      margin-top: 80px;
+    }
   }
 
   // ===== faq =====

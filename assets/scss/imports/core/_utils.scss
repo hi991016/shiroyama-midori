@@ -11,6 +11,18 @@
 }
 
 /* fadetab */
+[data-tabs-content] {
+  opacity: 0;
+  animation: 1s forwards fadeTab;
+  display: none;
+  visibility: hidden;
+
+  &.--active {
+    display: block;
+    visibility: visible;
+  }
+}
+
 @keyframes fadeTab {
   100% {
     opacity: 1;

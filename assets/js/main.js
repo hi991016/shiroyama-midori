@@ -188,19 +188,46 @@ eventsTrigger.forEach((evt) => {
 const initTabs = () => {
   const tabs = document.querySelectorAll("[data-tabs-items]");
   const contents = document.querySelectorAll("[data-tabs-content]");
-  if (!tabs || !contents) return;
+  const indicator = document.querySelector("[data-tabs-indicator]");
+  if (!tabs.length || !contents.length) return;
+
+  const handleTabChange = (tab) => {
+    if (!indicator) return;
+    indicator.style.width = `${tab.offsetWidth}px`;
+    indicator.style.left = `${tab.offsetLeft}px`;
+  };
 
   tabs.forEach((tab, index) => {
     tab.addEventListener("click", () => {
-      // remove all class items/content
+      const targetId = tab.getAttribute("data-tabs-items");
+
+      // remove active classes
       tabs.forEach((t) => t.classList.remove("--active"));
       contents.forEach((c) => c.classList.remove("--active"));
 
-      // add class item/click show/content
-      tab.classList.add("--active");
-      contents[index].classList.add("--active");
+      // add active to clicked tab and corresponding content
+      document
+        .querySelectorAll(`[data-tabs-items="${targetId}"]`)
+        .forEach((matchedTab) => matchedTab.classList.add("--active"));
+      const content = document.querySelector(
+        `[data-tabs-content="${targetId}"]`
+      );
+      if (content) content.classList.add("--active");
+
+      // move the indicator
+      handleTabChange(tab);
     });
   });
+
+  // init indicator on load/resize
+  const updateIndicatorOnResize = () => {
+    const activeTab = document.querySelector("[data-tabs-items].--active");
+    if (activeTab) {
+      handleTabChange(activeTab);
+    }
+  };
+  window.addEventListener("load", updateIndicatorOnResize);
+  window.addEventListener("resize", updateIndicatorOnResize);
 };
 initTabs();
 

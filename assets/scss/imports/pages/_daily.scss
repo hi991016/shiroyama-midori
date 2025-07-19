@@ -110,18 +110,6 @@
         }
       }
 
-      &_content {
-        opacity: 0;
-        animation: 1s forwards fadeTab;
-        display: none;
-        visibility: hidden;
-
-        &.--active {
-          display: block;
-          visibility: visible;
-        }
-      }
-
       @include maxW(1023px) {
         margin-top: 120px;
         display: block;
