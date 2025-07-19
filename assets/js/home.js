@@ -12,15 +12,12 @@ const homepage = () => {
 // ===== lenis =====
 let isLoading = true;
 window.lenis = new Lenis({
-  duration: 1,
+  duration: 1.0,
   easing: (t) => Math.min(1, 1.001 - Math.pow(1 - t, 2.5)),
-  direction: "vertical",
-  gestureDirection: "vertical",
   smooth: true,
+  mouseMultiplier: 1.0,
   smoothTouch: true,
-  mouseMultiplier: 1,
   touchMultiplier: 1.5,
-  autoRaf: true,
   infinite: false,
   direction: "vertical",
   gestureDirection: "vertical",
