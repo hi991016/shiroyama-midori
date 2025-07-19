@@ -208,12 +208,6 @@
   // ===== ishikawa =====
   .ishikawa {
     &_thumb {
-      &_main {
-        &:after {
-          background-color: rgba($color: #000000, $alpha: 0.2);
-        }
-      }
-
       &_logo {
         img {
           width: 230px;
