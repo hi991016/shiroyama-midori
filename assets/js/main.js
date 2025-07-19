@@ -6,8 +6,6 @@ const eventsTrigger = ["pageshow", "scroll"];
 
 // ===== init =====
 const init = () => {
-  // # #
-  console.clear();
   // # app height
   appHeight();
   // # init year
@@ -190,6 +188,7 @@ eventsTrigger.forEach((evt) => {
 const initTabs = () => {
   const tabs = document.querySelectorAll("[data-tabs-items]");
   const contents = document.querySelectorAll("[data-tabs-content]");
+  if (!tabs || !contents) return;
 
   tabs.forEach((tab, index) => {
     tab.addEventListener("click", () => {
@@ -204,6 +203,26 @@ const initTabs = () => {
   });
 };
 initTabs();
+
+// ===== accordion ======
+const initAccordionQA = () => {
+  const accordion = document.querySelectorAll("[data-accordion-btn]");
+  const panelAccordion = document.querySelectorAll("[data-accordion-panel]");
+  if (!accordion || !panelAccordion) return;
+
+  accordion.forEach((btn, i) => {
+    btn.addEventListener("click", () => {
+      btn.classList.toggle("--active");
+      const panel = panelAccordion[i];
+      if (panel.style.maxHeight) {
+        panel.style.maxHeight = null;
+      } else {
+        panel.style.maxHeight = panel.scrollHeight + "px";
+      }
+    });
+  });
+};
+initAccordionQA();
 
 // ===== clone slides when < 4 =====
 const cloneSlidesIfNeeded = (swiperSelector, minSlidesRequired = 4) => {

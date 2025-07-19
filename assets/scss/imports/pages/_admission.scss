@@ -97,9 +97,163 @@
 
   // ===== faq =====
   .faq {
-  }
+    &_items {
+      margin-top: 150px;
 
-  // ===== tour =====
-  .tour {
+      &:first-child {
+        margin-top: 120px;
+      }
+    }
+
+    &_group {
+      margin-top: 80px;
+    }
+
+    @include maxW(1023px) {
+      &_items {
+        margin-top: 80px;
+
+        &:first-child {
+          margin-top: 80px;
+        }
+      }
+
+      &_group {
+        margin-top: 45px;
+      }
+    }
+
+    &_accordion {
+      position: relative;
+      border-top: 2px solid #dde9d2;
+
+      &:last-child {
+        border-bottom: 2px solid #dde9d2;
+      }
+
+      &_btn,
+      &_panel {
+        display: grid;
+        grid-template-columns: max-content 1fr 50px;
+        align-items: center;
+        gap: 35px;
+      }
+
+      &_btn {
+        width: 100%;
+        align-items: center;
+        padding: 35px 0;
+        cursor: pointer;
+        position: relative;
+
+        &.--active {
+          .faq_accordion_plus {
+            transform: rotate(45deg);
+          }
+        }
+      }
+
+      &_panel {
+        max-height: 0;
+        overflow: hidden;
+        transition: all 0.5s ease-in-out;
+
+        .faq_accordion_word {
+          margin-top: -35px;
+        }
+      }
+
+      &_word {
+        padding-left: 35px;
+        font-size: 1.7rem;
+      }
+
+      &_title,
+      &_desc {
+        line-height: 1.75;
+        text-align: justify;
+        font-feature-settings: "palt" 1;
+      }
+
+      &_desc {
+        margin-bottom: 35px;
+      }
+
+      &_plus {
+        display: inline-block;
+        width: 20px;
+        height: 20px;
+        position: absolute;
+        right: 30px;
+        transition: transform 0.2s linear;
+
+        &:after,
+        &:before {
+          content: "";
+          position: absolute;
+          background-color: $green-cl;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+        }
+
+        &::before {
+          width: 20px;
+          height: 2px;
+        }
+
+        &::after {
+          width: 2px;
+          height: 20px;
+        }
+      }
+
+      @include maxW(1023px) {
+        &_btn,
+        &_panel {
+          grid-template-columns: max-content 1fr 30px;
+          gap: 15px;
+        }
+
+        &_btn {
+          padding: 25px 0;
+        }
+
+        &_panel {
+          .faq_accordion_word {
+            margin-top: -25px;
+          }
+        }
+
+        &_word {
+          padding-left: 15px;
+          font-size: 1.4rem;
+        }
+
+        &_title,
+        &_desc {
+          font-size: 1.4rem;
+          line-height: 1.57;
+        }
+
+        &_desc {
+          margin-bottom: 25px;
+        }
+
+        &_plus {
+          width: 12;
+          height: 12;
+          right: 12px;
+
+          &:before {
+            width: 12px;
+          }
+
+          &:after {
+            height: 12px;
+          }
+        }
+      }
+    }
   }
 }
