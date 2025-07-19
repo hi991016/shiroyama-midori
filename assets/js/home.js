@@ -10,32 +10,13 @@ const homepage = () => {
 };
 
 // ===== lenis =====
-let isLoading = true;
-window.lenis = new Lenis({
-  duration: 1.0,
-  easing: (t) => Math.min(1, 1.001 - Math.pow(1 - t, 2.5)),
-  smooth: true,
-  mouseMultiplier: 1.0,
-  smoothTouch: true,
-  touchMultiplier: 1.5,
-  infinite: false,
-  direction: "vertical",
-  gestureDirection: "vertical",
-});
-window.lenis.on("scroll", ScrollTrigger.update);
-gsap.ticker.add((time) => {
-  lenis.raf(time * 1000);
-});
-gsap.ticker.lagSmoothing(0);
-function raf(t) {
-  if (!isLoading) {
-    window.lenis.raf(t);
-  } else {
-    window.lenis.scrollTo(0, { immediate: true });
-  }
-  requestAnimationFrame(raf);
+if (!breakpoints.matches) {
+  window.lenis.on("scroll", ScrollTrigger.update);
+  gsap.ticker.add((time) => {
+    lenis.raf(time * 1000);
+  });
+  gsap.ticker.lagSmoothing(0);
 }
-requestAnimationFrame(raf);
 
 // ===== init loading =====
 const preventScroll = (e) => e.preventDefault();
@@ -45,12 +26,13 @@ const initLoading = async () => {
   if (sessionStorage.getItem("opening-displayed") === "true") {
     document.querySelector("[data-loading]").remove();
     swiperFv.autoplay.start();
-    isLoading = false;
+    window.lenis.start();
   } else {
     // # Block scroll events
     window.addEventListener("wheel", preventScroll, { passive: false });
     window.addEventListener("touchmove", preventScroll, { passive: false });
     window.addEventListener("scroll", preventScroll, { passive: false });
+    window.lenis.stop();
 
     // # step 1 -- fadein logo
     await delay(300);
@@ -64,7 +46,7 @@ const initLoading = async () => {
     window.removeEventListener("wheel", preventScroll);
     window.removeEventListener("touchmove", preventScroll);
     window.removeEventListener("scroll", preventScroll);
-    isLoading = false;
+    window.lenis.start();
 
     // # play swiper fv
     swiperFv.autoplay.start();

@@ -18,36 +18,34 @@ const init = () => {
 };
 
 // ===== lenis =====
-if (!window.lenis) {
-  window.lenis = new Lenis({
-    duration: 1.0,
-    easing: (t) => Math.min(1, 1.001 - Math.pow(1 - t, 2.5)),
-    smooth: true,
-    mouseMultiplier: 1.0,
-    smoothTouch: true,
-    touchMultiplier: 1.5,
-    infinite: false,
-    direction: "vertical",
-    gestureDirection: "vertical",
-  });
-  function raf(t) {
-    window.lenis.raf(t);
-    requestAnimationFrame(raf);
-  }
+window.lenis = new Lenis({
+  duration: 1.0,
+  easing: (t) => Math.min(1, 1.001 - Math.pow(1 - t, 2.5)),
+  smooth: true,
+  mouseMultiplier: 1.0,
+  smoothTouch: true,
+  touchMultiplier: 1.5,
+  infinite: false,
+  direction: "vertical",
+  gestureDirection: "vertical",
+});
+function raf(t) {
+  window.lenis.raf(t);
   requestAnimationFrame(raf);
-
-  // # back to top
-  const handleBacktoTop = () => {
-    window.lenis.scrollTo(0, {
-      duration: 1.5,
-      easing: (t) => t * t * t * (t * (t * 6 - 15) + 10),
-      force: true,
-    });
-  };
-  document.querySelectorAll("[data-backtotop]")?.forEach((e) => {
-    e.addEventListener("click", handleBacktoTop);
-  });
 }
+requestAnimationFrame(raf);
+
+// # back to top
+const handleBacktoTop = () => {
+  window.lenis.scrollTo(0, {
+    duration: 1.5,
+    easing: (t) => t * t * t * (t * (t * 6 - 15) + 10),
+    force: true,
+  });
+};
+document.querySelectorAll("[data-backtotop]")?.forEach((e) => {
+  e.addEventListener("click", handleBacktoTop);
+});
 
 // ===== app height =====
 const appHeight = () => {
