@@ -160,7 +160,10 @@ const initFadeIn = () => {
     let elem = fadeInArray[i];
     let distInView =
       elem.getBoundingClientRect().top - window.innerHeight + 100;
-    elem.classList.toggle("--show", distInView < 0);
+    if (distInView < 0) {
+      elem.classList.add("--show");
+    }
+    // elem.classList.toggle("--show", distInView < 0);
   }
 };
 eventsTrigger.forEach((evt) => {
